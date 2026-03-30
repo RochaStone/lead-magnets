@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 Claude Prompts That Don't Sound Like Everyone Else's â Thriving Era Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: #FDF8F4;
+    color: #1A1A1A;
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HERO â dark with magenta gradient overlay */
+  .hero {
+    background: #1A1A1A;
+    background-image: linear-gradient(135deg, rgba(194,24,91,0.15), rgba(183,110,121,0.10));
+    padding: 80px 24px 70px;
+    text-align: center;
+    color: #FDF8F4;
+  }
+
+  .hero .eyebrow {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #C2185B;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(36px, 7vw, 64px);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -1px;
+    margin-bottom: 28px;
+    color: #FDF8F4;
+  }
+
+  .hero h1 span { color: #C2185B; }
+
+  .hero .subtitle {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(253,248,244,0.7);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* SECTIONS */
+  .section-cream {
+    background: #FDF8F4;
+    padding: 72px 24px;
+  }
+
+  .section-dark {
+    background: #1A1A1A;
+    padding: 72px 24px;
+    color: #FDF8F4;
+  }
+
+  .section-accent {
+    background: #F5F0EC;
+    padding: 72px 24px;
+  }
+
+  .inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* PROMPT BLOCKS */
+  .prompt-block {
+    margin-bottom: 0;
+    padding: 40px 0;
+    border-bottom: 1px solid rgba(183,110,121,0.2);
+  }
+
+  .prompt-block:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .prompt-num {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    color: #C2185B;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+  }
+
+  .prompt-block h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(22px, 4vw, 28px);
+    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+    color: #1A1A1A;
+  }
+
+  .prompt-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #3A3A3A;
+    margin-bottom: 20px;
+  }
+
+  .prompt-code {
+    background: #1A1A1A;
+    color: #FDF8F4;
+    padding: 24px 28px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    position: relative;
+    border-left: 4px solid #C2185B;
+  }
+
+  .prompt-code::before {
+    content: 'PROMPT';
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #C2185B;
+    text-transform: uppercase;
+  }
+
+  .prompt-why {
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #888;
+    padding-left: 16px;
+    border-left: 1px solid rgba(183,110,121,0.3);
+  }
+
+  /* DARK SECTION */
+  .section-dark h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(28px, 5vw, 40px);
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: -0.5px;
+    margin-bottom: 24px;
+  }
+
+  .section-dark p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(253,248,244,0.7);
+    margin-bottom: 18px;
+  }
+
+  .section-dark p:last-child { margin-bottom: 0; }
+
+  .highlight { color: #E91E73; font-weight: 700; }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: linear-gradient(135deg, #C2185B, #B76E79);
+    padding: 72px 24px;
+    text-align: center;
+    color: #FDF8F4;
+  }
+
+  .cta-section p {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+    opacity: 0.9;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #C2185B;
+    background: #FFFFFF;
+    text-decoration: none;
+    padding: 16px 48px;
+    border: 2px solid #FFFFFF;
+    transition: all 0.3s ease;
+  }
+
+  .cta-btn:hover {
+    background: transparent;
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: #1A1A1A;
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 10px;
+    color: rgba(253,248,244,0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero { padding: 56px 20px 50px; }
+    .section-cream, .section-dark, .section-accent { padding: 48px 20px; }
+    .cta-section { padding: 48px 20px; }
+    .prompt-code { padding: 20px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">Thriving Era Studio</div>
+  <h1>5 CLAUDE PROMPTS THAT <span>DON'T SOUND LIKE EVERYONE ELSE'S</span></h1>
+  <p class="subtitle">
+    These are the 5 installed first with every founder in the OS. Not tricks. Structural shifts in how you communicate with Claude. The voice calibration one usually hits hardest.
+  </p>
+</div>
+
+<div class="section-cream">
+  <div class="inner">
+
+    <div class="prompt-block">
+      <div class="prompt-num">Prompt 01</div>
+      <h2>THE IDENTITY BRIEF</h2>
+      <p class="prompt-desc">Before you ask Claude to produce anything, tell it who you are. Not your job title â your positioning. Most founders skip this entirely. That's why the output sounds like it could belong to anyone.</p>
+      <div class="prompt-code">You are writing as [Your Name], a [your specific positioning â not your job title]. I work with [specific audience] on [specific transformation]. My tone is [3 precise words â not 'authentic' or 'professional']. I never use these words: [list 5-7]. I always use these: [list 5-7]. Write from this identity for the rest of this conversation.</div>
+      <p class="prompt-why">Why it works: Claude holds this context for the entire conversation. Without it, you get default-mode output â competent but generic.</p>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-num">Prompt 02</div>
+      <h2>THE ANTI-VOICE FILTER</h2>
+      <p class="prompt-desc">Telling Claude what NOT to do is often more powerful than telling it what to do. This prompt eliminates the patterns that make AI content immediately recognisable as AI content.</p>
+      <div class="prompt-code">Before you write anything, here are the rules:
+â No opening with a question designed to create urgency
+â No closing with an inspirational call to action
+â No bullet points in captions (prose only)
+â No warm-up sentences before the point
+â No "I want to share something" constructions
+â No affirmations or platitudes
+â Start at the point. Then let the reader feel it.</div>
+      <p class="prompt-why">Why it works: The fastest way to make AI output sound like you is to strip out everything that sounds like AI. What remains is closer to your actual voice.</p>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-num">Prompt 03</div>
+      <h2>THE VOICE CALIBRATION</h2>
+      <p class="prompt-desc">Paste 2-3 pieces of writing that sound most like you â captions, emails, anything. Then ask Claude to extract the pattern, not copy the content.</p>
+      <div class="prompt-code">Here are 3 pieces of my writing. Read them carefully. Extract:
+1. My sentence rhythm (short-long patterns, where I break paragraphs)
+2. My opening pattern (how I start)
+3. My closing pattern (how I end)
+4. Words and phrases I reach for repeatedly
+5. What I imply vs. what I state directly
+
+Then produce a 'Voice DNA' â a one-paragraph description of how I write. Use this Voice DNA for everything you produce in this conversation.</div>
+      <p class="prompt-why">Why it works: Claude is exceptional at pattern recognition. Once it has your rhythm, sentence architecture, and vocabulary mapped, the output shifts from 'good content' to 'content that sounds like you wrote it.'</p>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-num">Prompt 04</div>
+      <h2>THE OFFER ARCHITECT</h2>
+      <p class="prompt-desc">When you need to describe what you sell, don't ask Claude to "write sales copy." Give it the transformation, not the deliverables.</p>
+      <div class="prompt-code">I sell [offer name] for [price]. But I don't want you to describe the deliverables. I want you to describe what becomes possible after someone goes through this. What changes in their business, their confidence, their daily reality? Write from the transformation out â not from the feature list in.</div>
+      <p class="prompt-why">Why it works: Most founders describe their offer in deliverables â "you get 6 calls, a workbook, and access to a portal." That's architecture, not desire. Claude writes better sales copy when you point it at the outcome.</p>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-num">Prompt 05</div>
+      <h2>THE HELD-BACK LAYER</h2>
+      <p class="prompt-desc">The most powerful content comes from the thing you almost don't say. The story underneath the strategy. This prompt surfaces it.</p>
+      <div class="prompt-code">I want to write about [topic]. But I don't want the obvious angle. Ask me 3 questions about my personal experience with this topic â the specific, uncomfortable, real part that I might normally leave out. Then use my answers to write the piece from that layer instead of the surface.</div>
+      <p class="prompt-why">Why it works: The difference between content that performs and content that converts is specificity. Personal specificity. Claude can't invent this â but it can draw it out of you and build around it.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="section-dark">
+  <div class="inner">
+    <h2>THESE 5 ARE THE ENTRY POINT</h2>
+    <p>Each of these prompts improves one conversation with Claude. They're isolated moves â powerful, but disconnected.</p>
+    <p>An operating system is what connects them. Your voice, your offers, your audience, your strategy, your content â <span class="highlight">running as one coherent system</span> where Claude already knows who you are before you type a word.</p>
+    <p>That's the difference between using AI and having AI that runs your business.</p>
+  </div>
+</div>
+
+<div class="cta-section">
+  <p>The full system â installed into your actual business.</p>
+  <a href="https://founders.thrivingera.com" class="cta-btn">See The OS Installation â</a>
+</div>
+
+<div class="footer">Â© 2026 Thriving Era Studio Â· Rochelle Livingstone</div>
+
+</body>
+</html>
