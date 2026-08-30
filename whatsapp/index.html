@@ -604,7 +604,7 @@
       <div class="cap-card">
         <div class="cap-num">06</div>
         <div class="cap-name">Send &amp; Schedule</div>
-        <p class="cap-desc">Outbound from your own number, on your approval. Scheduling depends on which path you pick &mdash; see the next section, because this is where guides overpromise.</p>
+        <p class="cap-desc">Outbound from your own number, on your approval. Scheduling depends on which path you pick &mdash; and on the local path, so does the number format. Both are covered below, because this is where guides overpromise.</p>
       </div>
     </div>
   </div>
@@ -726,6 +726,13 @@
         and reach Claude only when you ask a question. Nothing is uploaded. Leave the bridge terminal
         running &mdash; it is the live connection, not a background service.
       </p>
+
+      <div class="note">
+        <strong>Then message yourself, before anything else.</strong> It is the only way to know the
+        connection is real, and it costs nothing to be wrong in your own chat window. If the test
+        message arrives from an account that isn't yours, you scanned the wrong phone &mdash; log
+        that device out and pair again.
+      </div>
     </div>
 
     <div class="path-block">
@@ -858,6 +865,9 @@
 
       <dt>Only recent messages show up</dt>
       <dd>History backfills after pairing and takes a while on a large account. Give it time before concluding it's broken. If Claude ever summarises a period it couldn't actually read, stop trusting that answer &mdash; a confident summary of unread messages is worse than no summary.</dd>
+
+      <dt>It says it sent, and nothing arrived</dt>
+      <dd>Almost always the number format, and it fails <em>silently</em> &mdash; no error, no delivery. On the local path the recipient string becomes the address verbatim, so a leading <code class="inline">+</code> or a domestic number with its trunk zero is simply an invalid address. Use bare international digits: country code, no plus, no leading zero, no spaces. An Australian mobile written <code class="inline">0491&nbsp;570&nbsp;156</code> becomes <code class="inline">61491570156</code>. A UK <code class="inline">07700&nbsp;900123</code> becomes <code class="inline">447700900123</code>.</dd>
 
       <dt>You're nervous about the first send</dt>
       <dd>Correct instinct. Message yourself first. Then one trusted contact. Then rely on it. Never let the first real send be to a client.</dd>
