@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automate Your WhatsApp With Claude — Thriving Era Studio</title>
+<meta name="description" content="Read, triage, draft and schedule from your own number. Three setups, from five minutes to a fully private local build — and the honest trade between them.">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+  body {
+    background: #FDF8F4;
+    color: #1A1A1A;
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    background: #1A1A1A;
+    background-image: linear-gradient(135deg, rgba(194,24,91,0.15), rgba(183,110,121,0.10));
+    padding: 80px 24px 70px;
+    text-align: center;
+    color: #FDF8F4;
+  }
+
+  .hero .eyebrow {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #C2185B;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(36px, 7vw, 64px);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -1px;
+    margin-bottom: 28px;
+    color: #FDF8F4;
+  }
+
+  .hero h1 span { color: #C2185B; }
+
+  .hero .subtitle {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(253,248,244,0.7);
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  /* NUMBERS BAR */
+  .numbers-bar {
+    background: #C2185B;
+    padding: 36px 24px;
+    color: #FDF8F4;
+  }
+
+  .numbers-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0;
+  }
+
+  .number-item {
+    text-align: center;
+    padding: 16px 12px;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .number-item:last-child { border-right: none; }
+
+  .number-value {
+    font-family: 'Anton', sans-serif;
+    font-size: 36px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .number-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  /* SECTIONS */
+  .section-cream { background: #FDF8F4; padding: 72px 24px; }
+  .section-dark { background: #1A1A1A; padding: 72px 24px; color: #FDF8F4; }
+  .section-accent { background: #F5F0EC; padding: 72px 24px; }
+
+  .inner { max-width: 760px; margin: 0 auto; }
+
+  .section-header { margin-bottom: 36px; }
+
+  .section-header .eyebrow {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #C2185B;
+    margin-bottom: 12px;
+  }
+
+  .section-header h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(28px, 5vw, 40px);
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: -0.5px;
+  }
+
+  .section-dark .section-header .eyebrow { color: #E91E73; }
+
+  p { font-size: 15px; line-height: 1.7; color: #3A3A3A; margin-bottom: 18px; }
+  p:last-child { margin-bottom: 0; }
+
+  .section-dark h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(28px, 5vw, 40px);
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: -0.5px;
+    margin-bottom: 24px;
+  }
+
+  .section-dark p { font-size: 16px; color: rgba(253,248,244,0.7); }
+
+  .highlight { color: #E91E73; font-weight: 700; }
+
+  .lead {
+    font-size: 17px;
+    line-height: 1.65;
+    color: #1A1A1A;
+    margin-bottom: 28px;
+  }
+
+  /* CAPABILITY GRID */
+  .cap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .cap-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(183,110,121,0.2);
+    padding: 28px 24px;
+    transition: border-color 0.3s ease;
+  }
+
+  .cap-card:hover { border-color: #C2185B; }
+
+  .cap-num {
+    font-family: 'Anton', sans-serif;
+    font-size: 32px;
+    color: #C2185B;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .cap-name {
+    font-family: 'Anton', sans-serif;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+  }
+
+  .cap-desc { font-size: 14px; line-height: 1.6; color: #3A3A3A; margin: 0; }
+
+  /* COMPARISON TABLE */
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  table {
+    width: 100%;
+    min-width: 580px;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  thead th {
+    font-family: 'Anton', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: left;
+    padding: 14px 16px;
+    background: #1A1A1A;
+    color: #FDF8F4;
+    font-weight: 400;
+  }
+
+  tbody td {
+    padding: 18px 16px;
+    border-bottom: 1px solid rgba(183,110,121,0.2);
+    vertical-align: top;
+    color: #3A3A3A;
+    background: #FFFFFF;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody td strong { color: #1A1A1A; }
+
+  /* PATH BLOCKS */
+  .path-block { padding: 40px 0; border-bottom: 1px solid rgba(183,110,121,0.2); }
+  .path-block:last-of-type { border-bottom: none; padding-bottom: 0; }
+
+  .path-num {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    color: #C2185B;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+  }
+
+  .path-block h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(22px, 4vw, 28px);
+    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    color: #1A1A1A;
+  }
+
+  .path-meta {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #B76E79;
+    margin-bottom: 20px;
+  }
+
+  ol.steps { list-style: none; counter-reset: step; margin: 0 0 20px; }
+
+  ol.steps li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 42px;
+    margin-bottom: 16px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: #3A3A3A;
+  }
+
+  ol.steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 26px;
+    height: 26px;
+    background: #C2185B;
+    color: #FDF8F4;
+    font-family: 'Anton', sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  ol.steps li:last-child { margin-bottom: 0; }
+
+  /* CODE */
+  pre, .code {
+    background: #1A1A1A;
+    color: #FDF8F4;
+    padding: 22px 26px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+    border-left: 4px solid #C2185B;
+    margin: 16px 0;
+  }
+
+  code.inline {
+    background: rgba(194,24,91,0.08);
+    color: #C2185B;
+    padding: 2px 6px;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  .prompt-code {
+    background: #1A1A1A;
+    color: #FDF8F4;
+    padding: 24px 28px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    position: relative;
+    border-left: 4px solid #C2185B;
+  }
+
+  .prompt-code::before {
+    content: 'PROMPT';
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #C2185B;
+    text-transform: uppercase;
+  }
+
+  .prompt-block { padding: 32px 0; border-bottom: 1px solid rgba(183,110,121,0.2); }
+  .prompt-block:last-of-type { border-bottom: none; padding-bottom: 0; }
+
+  .prompt-num {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    color: #C2185B;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+  }
+
+  .prompt-block h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(20px, 3.5vw, 25px);
+    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin-bottom: 14px;
+    color: #1A1A1A;
+  }
+
+  .prompt-why {
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #888;
+    padding-left: 16px;
+    border-left: 1px solid rgba(183,110,121,0.3);
+  }
+
+  /* NOTE */
+  .note {
+    background: #FFFFFF;
+    border-left: 4px solid #C2185B;
+    padding: 22px 26px;
+    margin: 24px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #3A3A3A;
+  }
+
+  .note strong { color: #1A1A1A; }
+  .note:last-child { margin-bottom: 0; }
+
+  .section-dark .note {
+    background: rgba(253,248,244,0.05);
+    color: rgba(253,248,244,0.75);
+  }
+
+  .section-dark .note strong { color: #FDF8F4; }
+
+  /* TIMELINE */
+  .timeline { list-style: none; }
+
+  .timeline li {
+    display: flex;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(183,110,121,0.2);
+    font-size: 15px;
+    line-height: 1.6;
+    color: #3A3A3A;
+  }
+
+  .timeline li:last-child { border-bottom: none; }
+
+  .timeline .t {
+    font-family: 'Anton', sans-serif;
+    font-size: 15px;
+    color: #C2185B;
+    flex: 0 0 62px;
+    letter-spacing: 0.5px;
+  }
+
+  /* TROUBLESHOOTING */
+  dl.trouble { margin: 0; }
+
+  dl.trouble dt {
+    font-family: 'Anton', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: -0.2px;
+    color: #1A1A1A;
+    margin-bottom: 8px;
+  }
+
+  dl.trouble dd {
+    margin: 0 0 26px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #3A3A3A;
+    padding-left: 16px;
+    border-left: 1px solid rgba(183,110,121,0.3);
+  }
+
+  dl.trouble dd:last-child { margin-bottom: 0; }
+
+  /* RULES LIST */
+  ul.rules { list-style: none; margin: 0; }
+
+  ul.rules li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(253,248,244,0.7);
+  }
+
+  ul.rules li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 10px;
+    height: 2px;
+    background: #E91E73;
+  }
+
+  ul.rules li:last-child { margin-bottom: 0; }
+
+
+  /* GATE */
+  .gate {
+    background: #1A1A1A;
+    background-image: linear-gradient(135deg, rgba(194,24,91,0.18), rgba(183,110,121,0.10));
+    padding: 64px 24px;
+    color: #FDF8F4;
+    text-align: center;
+  }
+
+  .gate .inner { max-width: 560px; }
+
+  .gate .eyebrow {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #E91E73;
+    margin-bottom: 14px;
+  }
+
+  .gate h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(26px, 4.5vw, 36px);
+    text-transform: uppercase;
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+    text-wrap: balance;
+  }
+
+  .gate p.gate-sub {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(253,248,244,0.7);
+    margin-bottom: 28px;
+  }
+
+  .gate-form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+
+  .gate-form label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(253,248,244,0.55);
+  }
+
+  .gate-form input[type="text"],
+  .gate-form input[type="email"],
+  .gate-form input[type="tel"] {
+    font-family: 'Courier Prime', monospace;
+    font-size: 15px;
+    padding: 14px 16px;
+    background: #FDF8F4;
+    color: #1A1A1A;
+    border: 2px solid transparent;
+    width: 100%;
+  }
+
+  .gate-form input:focus-visible {
+    outline: none;
+    border-color: #E91E73;
+  }
+
+  .gate-form button {
+    font-family: 'Anton', sans-serif;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #1A1A1A;
+    background: #FDF8F4;
+    border: 2px solid #FDF8F4;
+    padding: 15px 24px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    margin-top: 6px;
+  }
+
+  .gate-form button:hover:not(:disabled) { background: transparent; color: #FDF8F4; }
+  .gate-form button:focus-visible { outline: 3px solid #E91E73; outline-offset: 3px; }
+  .gate-form button:disabled { opacity: 0.6; cursor: wait; }
+
+  /* OPT-IN */
+  .optin {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    margin-top: 4px;
+    cursor: pointer;
+  }
+
+  .optin input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    flex: 0 0 18px;
+    accent-color: #C2185B;
+    cursor: pointer;
+  }
+
+  .optin input[type="checkbox"]:focus-visible { outline: 3px solid #E91E73; outline-offset: 2px; }
+
+  .optin span {
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(253,248,244,0.75);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .optin-number { display: none; flex-direction: column; gap: 8px; }
+  .optin-number.shown { display: flex; }
+
+  .optin-hint {
+    font-size: 11px;
+    line-height: 1.5;
+    color: rgba(253,248,244,0.45);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* Bots fill every field. Humans never see this one. */
+  .gate-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .gate-note {
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba(253,248,244,0.45);
+    margin-top: 18px;
+  }
+
+  .gate-msg {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 14px;
+    min-height: 20px;
+    color: #FFB3CE;
+  }
+
+  /* SECONDARY CTA ROW */
+  .cta-secondary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .cta-link {
+    font-family: 'Courier Prime', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FDF8F4;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(253,248,244,0.45);
+    padding-bottom: 3px;
+    transition: border-color 0.3s ease;
+  }
+
+  .cta-link:hover { border-color: #FDF8F4; }
+  .cta-link:focus-visible { outline: 3px solid #FDF8F4; outline-offset: 4px; }
+
+  /* CTA */
+  .cta-section {
+    background: linear-gradient(135deg, #C2185B, #B76E79);
+    padding: 72px 24px;
+    text-align: center;
+    color: #FDF8F4;
+  }
+
+  .cta-section h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(28px, 5vw, 40px);
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .cta-section p {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+    color: rgba(253,248,244,0.9);
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #C2185B;
+    background: #FFFFFF;
+    text-decoration: none;
+    padding: 16px 48px;
+    border: 2px solid #FFFFFF;
+    transition: all 0.3s ease;
+  }
+
+  .cta-btn:hover { background: transparent; color: #FFFFFF; border-color: #FFFFFF; }
+
+  /* FOOTER */
+  .footer {
+    background: #1A1A1A;
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 10px;
+    color: rgba(253,248,244,0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 56px 20px 50px; }
+    .section-cream, .section-dark, .section-accent { padding: 48px 20px; }
+    .cta-section { padding: 48px 20px; }
+    .gate { padding: 44px 20px; }
+    .cap-grid { grid-template-columns: 1fr; }
+    .numbers-inner { grid-template-columns: 1fr 1fr; }
+    .number-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); }
+    .number-item:last-child { border-bottom: none; }
+    pre, .code, .prompt-code { padding: 18px 20px; font-size: 12px; }
+    .timeline li { flex-direction: column; gap: 4px; }
+    .timeline .t { flex: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">Thriving Era Studio</div>
+  <h1>AUTOMATE YOUR WHATSAPP<br><span>WITH CLAUDE</span></h1>
+  <p class="subtitle">
+    Read, triage, draft and schedule from your own number. Three setups &mdash; from five minutes
+    to a fully private local build. Including the part most guides leave out: what each one
+    genuinely cannot do.
+  </p>
+</div>
+
+<div class="numbers-bar">
+  <div class="numbers-inner">
+    <div class="number-item">
+      <div class="number-value">3</div>
+      <div class="number-label">Setup Paths</div>
+    </div>
+    <div class="number-item">
+      <div class="number-value">5</div>
+      <div class="number-label">Min, Fastest</div>
+    </div>
+    <div class="number-item">
+      <div class="number-value">12</div>
+      <div class="number-label">Tools Unlocked</div>
+    </div>
+    <div class="number-item">
+      <div class="number-value">0</div>
+      <div class="number-label">Devs Required</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-cream">
+  <div class="inner">
+    <div class="section-header">
+      <div class="eyebrow">The Problem</div>
+      <h2>YOUR REAL WORK IS HIDING IN THERE</h2>
+    </div>
+    <p class="lead">
+      You open WhatsApp to check one thing and lose twenty minutes. Forty unread threads, and the
+      message that decides your month is somewhere underneath a voice note about lunch.
+    </p>
+    <p>
+      Clients, leads, collaborators and the one follow-up you keep forgetting all live in the same
+      crowded inbox, with no hierarchy between them. Every thread looks equally urgent, which means
+      none of them are. So you scroll, you feel behind, and you close the app having cleared nothing.
+    </p>
+    <p>
+      The fix was never typing faster. It was giving something the ability to read the whole pile
+      and tell you the two things that actually need a human. That is a different capability, and
+      it is now a forty-minute setup.
+    </p>
+  </div>
+</div>
+
+<div class="section-accent">
+  <div class="inner">
+    <div class="section-header">
+      <div class="eyebrow">The Payoff</div>
+      <h2>WHAT IT DOES ONCE CONNECTED</h2>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap-card">
+        <div class="cap-num">01</div>
+        <div class="cap-name">Triage</div>
+        <p class="cap-desc">Reads every recent thread and returns three groups: needs you, needs a reply, can wait. With what is at stake in each &mdash; not a summary of what was said.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">02</div>
+        <div class="cap-name">Relationship Read</div>
+        <p class="cap-desc">Reconstructs a client's entire history in seconds. What was agreed, what is outstanding on each side, when it last moved. Run it before every discovery call.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">03</div>
+        <div class="cap-name">Drafts In Your Voice</div>
+        <p class="cap-desc">Writes the reply the way you write, matched to the register of that specific relationship. Held for your approval, never sent behind your back.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">04</div>
+        <div class="cap-name">The Promise Sweep</div>
+        <p class="cap-desc">Finds every message where you said you would send something, and checks whether you ever did. This is the one that pays for the afternoon.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">05</div>
+        <div class="cap-name">Search That Understands</div>
+        <p class="cap-desc">Find the rate you quoted in March, the address someone sent, the detail you know exists but cannot surface with a keyword.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">06</div>
+        <div class="cap-name">Send &amp; Schedule</div>
+        <p class="cap-desc">Outbound from your own number, on your approval. Scheduling depends on which path you pick &mdash; and on the local path, so does the number format. Both are covered below, because this is where guides overpromise.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-cream">
+  <div class="inner">
+    <div class="section-header">
+      <div class="eyebrow">Pick Your Path</div>
+      <h2>THREE WAYS TO SET IT UP</h2>
+    </div>
+    <p>
+      Choose on two questions: how much control you want over where your messages live, and whether
+      this is for you or for a team inbox.
+    </p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Path</th>
+            <th>Effort</th>
+            <th>Where messages go</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hosted connector</strong></td>
+            <td>~5 min, no code</td>
+            <td>Through a provider's servers</td>
+            <td>Creators and solo operators who want it working today</td>
+          </tr>
+          <tr>
+            <td><strong>Local bridge</strong></td>
+            <td>20&ndash;30 min</td>
+            <td>Stay on your machine</td>
+            <td>Client work, anything confidential, full control</td>
+          </tr>
+          <tr>
+            <td><strong>Business Cloud API</strong></td>
+            <td>Setup + Meta approval</td>
+            <td>Meta, verified business number</td>
+            <td>Support inboxes, teams, broadcasts</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>If you hold client confidences, take the local path.</strong> A hosted connector is
+      genuinely faster and genuinely fine for a personal inbox. It is a different decision when the
+      threads contain other people's business.
+    </div>
+  </div>
+</div>
+
+
+<div class="gate" id="gate">
+  <div class="inner">
+    <div class="eyebrow">The Rest Of The Guide</div>
+    <h2>THE SETUP, THE PROMPTS, AND WHAT BREAKS</h2>
+    <p class="gate-sub">
+      You have the map. The build is below &mdash; step-by-step for all three paths, the five
+      prompts to run first, and the failures that cost people an afternoon. Tell me where to send it.
+    </p>
+
+    <form class="gate-form" id="gate-form" novalidate>
+      <label for="gate-name">First name</label>
+      <input type="text" id="gate-name" name="name" autocomplete="given-name" placeholder="Rocha">
+
+      <label for="gate-email">Email</label>
+      <input type="email" id="gate-email" name="email" autocomplete="email" required
+             placeholder="you@yourstudio.com">
+
+      <label class="optin" for="gate-wa">
+        <input type="checkbox" id="gate-wa" name="whatsapp_optin">
+        <span id="gate-wa-text">Also send me the occasional build-along on WhatsApp. Never daily, never a broadcast list I can't leave.</span>
+      </label>
+
+      <div class="optin-number" id="gate-wa-wrap">
+        <label for="gate-wa-number">WhatsApp number</label>
+        <input type="tel" id="gate-wa-number" name="whatsapp_number" autocomplete="tel"
+               placeholder="+61 491 570 156">
+        <span class="optin-hint">Include your country code. Without it I can't tell a London number from a Sydney one.</span>
+      </div>
+
+      <div class="gate-hp" aria-hidden="true">
+        <label for="gate-company">Company</label>
+        <input type="text" id="gate-company" name="company" tabindex="-1" autocomplete="off">
+      </div>
+
+      <button type="submit" id="gate-submit">Unlock The Build &rarr;</button>
+    </form>
+
+    <p class="gate-msg" id="gate-msg" role="status" aria-live="polite"></p>
+    <p class="gate-note">
+      One email, the guide, and the occasional build-along. Unsubscribe in a click, and I honour it
+      permanently &mdash; the list checks itself against every removal request before it sends.
+    </p>
+  </div>
+</div>
+
+<div class="section-accent gated" hidden>
+  <div class="inner">
+
+    <div class="path-block">
+      <div class="path-num">Path 01</div>
+      <h3>HOSTED CONNECTOR</h3>
+      <div class="path-meta">About 5 minutes &middot; No code &middot; Creators and solo operators</div>
+      <ol class="steps">
+        <li>In Claude, open <strong>Settings &rarr; Connectors</strong> and choose <strong>Add custom connector</strong>.</li>
+        <li>Paste the MCP URL from a hosted WhatsApp provider &mdash; Blueticks and Wassenger both offer one &mdash; then click <strong>Connect</strong>.</li>
+        <li>Claude sends you to the provider to log in and approve access on your number.</li>
+        <li>You are live on web and desktop. Message yourself first to test, before you point it at a real thread.</li>
+      </ol>
+      <p>
+        Fastest route by a distance, and the only one that needs nothing installed. The trade is
+        real and worth naming: your messages pass through a third party's infrastructure. For a
+        personal inbox that is an ordinary trade. For client work it is a decision, not a detail.
+      </p>
+    </div>
+
+    <div class="path-block">
+      <div class="path-num">Path 02</div>
+      <h3>LOCAL BRIDGE, FULLY PRIVATE</h3>
+      <div class="path-meta">20&ndash;30 minutes &middot; Nothing leaves your machine</div>
+      <ol class="steps">
+        <li>Install the prerequisites: <strong>Go</strong>, <strong>Python 3</strong>, and the <strong>uv</strong> package manager (<code class="inline">curl -LsSf https://astral.sh/uv/install.sh | sh</code>). <code class="inline">ffmpeg</code> is optional and only needed for voice notes.</li>
+        <li>Clone the open-source server: <code class="inline">git clone https://github.com/lharries/whatsapp-mcp</code></li>
+        <li>Run the bridge with <code class="inline">cd whatsapp-bridge &amp;&amp; go run main.go</code>. A QR code prints in the terminal.</li>
+        <li>On your phone: <strong>WhatsApp &rarr; Settings &rarr; Linked devices &rarr; Link a device</strong>, and scan it. Same mechanism as WhatsApp Web.</li>
+        <li>Add the server to your Claude config (below), restart Claude, and ask for your recent chats.</li>
+      </ol>
+
+      <p>Add this block to your config file, replacing both placeholders:</p>
+      <pre>{
+  "mcpServers": {
+    "whatsapp": {
+      "command": "{{PATH_TO_UV}}",
+      "args": [
+        "--directory",
+        "{{PATH_TO_SRC}}/whatsapp-mcp/whatsapp-mcp-server",
+        "run",
+        "main.py"
+      ]
+    }
+  }
+}</pre>
+
+      <p>
+        <code class="inline">{{PATH_TO_UV}}</code> is the output of <code class="inline">which uv</code>.
+        <code class="inline">{{PATH_TO_SRC}}</code> is wherever you cloned the repo. Both must be
+        absolute paths &mdash; a relative path here is the single most common reason this fails.
+      </p>
+
+      <div class="note">
+        <strong>Where the config lives.</strong><br>
+        macOS: <code class="inline">~/Library/Application Support/Claude/claude_desktop_config.json</code><br>
+        Windows: <code class="inline">%APPDATA%\Claude\claude_desktop_config.json</code>
+      </div>
+
+      <p>
+        Your chats sit in a local SQLite database under <code class="inline">whatsapp-bridge/store/</code>
+        and reach Claude only when you ask a question. Nothing is uploaded. Leave the bridge terminal
+        running &mdash; it is the live connection, not a background service.
+      </p>
+
+      <div class="note">
+        <strong>Then message yourself, before anything else.</strong> It is the only way to know the
+        connection is real, and it costs nothing to be wrong in your own chat window. If the test
+        message arrives from an account that isn't yours, you scanned the wrong phone &mdash; log
+        that device out and pair again.
+      </div>
+    </div>
+
+    <div class="path-block">
+      <div class="path-num">Path 03</div>
+      <h3>BUSINESS CLOUD API, AT SCALE</h3>
+      <div class="path-meta">Setup + Meta approval &middot; Support inboxes and broadcasts</div>
+      <ol class="steps">
+        <li>Set up a Meta Business account and the official WhatsApp Business Cloud API.</li>
+        <li>Verify your number and get your message templates approved. Budget days, not hours &mdash; template review is the long pole.</li>
+        <li>Connect Claude through an automation layer such as n8n or Make.</li>
+        <li>Route incoming messages to Claude for on-brand replies, with a human approving anything that commits you to something.</li>
+      </ol>
+      <p>
+        This is the only path built for a team inbox and the only one that survives volume. It is
+        also the only one where you are operating inside Meta's rules on templates and messaging
+        windows &mdash; which is a feature when you are sending at scale, and friction when you are not.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<div class="gated section-dark" hidden>
+  <div class="inner">
+    <div class="section-header">
+      <div class="eyebrow">Read This Before You Believe A Demo</div>
+      <h2>THE PART EVERY GUIDE GETS WRONG</h2>
+    </div>
+    <p>
+      The local bridge exposes twelve tools. It can search your contacts, list your chats, read a
+      thread, pull the context around a single message, send text, send a file, send a voice note,
+      and download media.
+    </p>
+    <p>
+      <span class="highlight">It cannot schedule.</span> There is no scheduling tool. No prompt
+      unlocks one. If you ask Claude to send something at 11am tomorrow on this path, the honest
+      answer is that it can't &mdash; and an unreliable one is that it says yes and nothing sends.
+    </p>
+    <p>
+      Hosted providers generally do schedule natively, because their servers stay awake when your
+      laptop doesn't. That is a real reason to pick Path 1, and a fair trade to make knowingly.
+    </p>
+    <div class="note">
+      <strong>If you want the local path and scheduling:</strong> keep a small queue file on your
+      machine and a timer that sends anything due to the bridge's local endpoint. Roughly forty
+      lines of Python and a scheduled job. Two things to get right &mdash; store times in UTC so a
+      flight doesn't shift your sends, and retry rather than discard when the bridge is unreachable,
+      so a closed laptop delays a message instead of dropping it.
+    </div>
+    <p>
+      Ask any tool what it can actually do before you trust it with a client. The answer is
+      usually shorter than the landing page.
+    </p>
+  </div>
+</div>
+
+<div class="gated section-cream" hidden>
+  <div class="inner">
+    <div class="section-header">
+      <div class="eyebrow">Steal These</div>
+      <h2>FIVE PROMPTS TO RUN FIRST</h2>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-num">Prompt 01</div>
+      <h3>THE TRIAGE</h3>
+      <div class="prompt-code">Read my WhatsApp threads from the last three days. Don't summarise them one by one. Group them into: needs me, needs a reply but not my judgment, and can wait. For anything in the first group, tell me what's at stake — not what they said.</div>
+      <p class="prompt-why">Why it works: "summarise my chats" gets you the inbox again with extra steps. Asking for stakes forces a judgment call, which is the thing you actually wanted.</p>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-num">Prompt 02</div>
+      <h3>THE PROMISE SWEEP</h3>
+      <div class="prompt-code">Search my sent WhatsApp messages from the last 30 days for anything where I committed to sending, doing, or deciding something. For each one, check whether I ever followed through. Show me only the ones I didn't, oldest first, with anything involving money at the top.</div>
+      <p class="prompt-why">Why it works: this is the highest-value thing on the list and the one nobody thinks to ask for. Most founders are carrying four unkept promises they have genuinely forgotten. It usually finds money.</p>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-num">Prompt 03</div>
+      <h3>THE RELATIONSHIP READ</h3>
+      <div class="prompt-code">Read my full history with [name]. Tell me: where this started, what we agreed, what's outstanding on each side, when it last moved, and what the next move should be. Flag anything involving money explicitly.</div>
+      <p class="prompt-why">Why it works: run this before a call and you walk in holding the whole arc instead of the last three messages. It is the difference between remembering someone and knowing where you stand.</p>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-num">Prompt 04</div>
+      <h3>THE DRAFT, IN YOUR REGISTER</h3>
+      <div class="prompt-code">Read my last 15 messages with [name] and notice how formal we are with each other. Draft a reply about [topic] matching that register. Two to five sentences, prose not bullets, no "just checking in", no sign-off. Show it to me — don't send it.</div>
+      <p class="prompt-why">Why it works: voice is constant, register is not. Naming the length and banning the filler phrases removes the two things that make a draft read as written by an assistant.</p>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-num">Prompt 05</div>
+      <h3>THE COOLING CHECK</h3>
+      <div class="prompt-code">Find threads where I made the last substantive move — a proposal, a quote, an offer — and they haven't replied in four days or more. For each, tell me how long it's been and draft a follow-up that gives them an easy way to say no.</div>
+      <p class="prompt-why">Why it works: silence after a number is data, not absence. And a follow-up that permits a no gets answered far more often than one that only permits a yes.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="gated section-accent" hidden>
+  <div class="inner">
+    <div class="section-header">
+      <div class="eyebrow">A Day With It</div>
+      <h2>WHAT THE FIRST TEN MINUTES LOOK LIKE</h2>
+    </div>
+    <ul class="timeline">
+      <li><span class="t">8:02</span><span>"Triage my WhatsApp." Three flagged, four need a quick reply, twelve can wait.</span></li>
+      <li><span class="t">8:04</span><span>One of the three is a promise you forgot: a proposal you said you'd send on Tuesday. It is Friday.</span></li>
+      <li><span class="t">8:05</span><span>"Draft replies to the four." You read them, change one word, approve.</span></li>
+      <li><span class="t">8:07</span><span>"Read my full history with the retreat client." You walk into the 9am holding the whole arc.</span></li>
+      <li><span class="t">8:09</span><span>You close WhatsApp having actually cleared it, not scrolled it.</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="gated section-cream" hidden>
+  <div class="inner">
+    <div class="section-header">
+      <div class="eyebrow">If Something Breaks</div>
+      <h2>THE FOUR THINGS THAT GO WRONG</h2>
+    </div>
+    <dl class="trouble">
+      <dt>The tools don't appear in Claude</dt>
+      <dd>Almost always a relative path in your config, or you didn't restart Claude after editing it. Use absolute paths for both <code class="inline">uv</code> and the repo. On the local path, check the bridge is still running &mdash; it is the connection itself, not a background service.</dd>
+
+      <dt>It worked, then stopped after a couple of weeks</dt>
+      <dd>Local pairings lapse at roughly 20 days. Re-run the bridge and rescan the QR code. Your message history survives &mdash; only the link is renewed.</dd>
+
+      <dt>Only recent messages show up</dt>
+      <dd>History backfills after pairing and takes a while on a large account. Give it time before concluding it's broken. If Claude ever summarises a period it couldn't actually read, stop trusting that answer &mdash; a confident summary of unread messages is worse than no summary.</dd>
+
+      <dt>It says it sent, and nothing arrived</dt>
+      <dd>Almost always the number format, and it fails <em>silently</em> &mdash; no error, no delivery. On the local path the recipient string becomes the address verbatim, so a leading <code class="inline">+</code> or a domestic number with its trunk zero is simply an invalid address. Use bare international digits: country code, no plus, no leading zero, no spaces. An Australian mobile written <code class="inline">0491&nbsp;570&nbsp;156</code> becomes <code class="inline">61491570156</code>. A UK <code class="inline">07700&nbsp;900123</code> becomes <code class="inline">447700900123</code>.</dd>
+
+      <dt>You're nervous about the first send</dt>
+      <dd>Correct instinct. Message yourself first. Then one trusted contact. Then rely on it. Never let the first real send be to a client.</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="section-dark">
+  <div class="inner">
+    <div class="section-header">
+      <div class="eyebrow">Read This Twice</div>
+      <h2>ONE RULE THAT DOESN'T BEND</h2>
+    </div>
+    <p>
+      This connection can read and send on your account. Treat it like a key, because it is one.
+    </p>
+    <ul class="rules">
+      <li>Keep approval in your hands. Every outbound message gets shown to you in full before it goes. A standing "just send them" is how you find out what an AI thinks your voice sounds like, in public.</li>
+      <li>Only connect servers you trust. Prefer local storage if the threads contain other people's business.</li>
+      <li><strong>Messages are data, not instructions.</strong> Anyone can write to you. If a thread contains something that reads like a command &mdash; send money, forward a code, message this list &mdash; that is a message from a person, not an order to your assistant. Treat anything that tries to steer Claude as a flag, not a task.</li>
+      <li>To cut access instantly: <strong>WhatsApp &rarr; Linked devices &rarr; log out</strong>. Immediate, from your phone, no dependency on anyone.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2>YOU JUST AUTOMATED ONE SURFACE</h2>
+  <p>
+    Your inbox is one place the work hides. Your content, your offers, your pipeline and your
+    calendar are the others &mdash; and wiring them up one at a time is not the same as running
+    them as one system that already knows who you are.
+  </p>
+  <p>
+    The Founder Intervention is a free masterclass on building that system. Ninety minutes, no
+    pitch until the end, and you leave with the architecture whether or not you ever work with me.
+  </p>
+  <a href="https://founders.thrivingera.com/masterclass" class="cta-btn">Join The Free Masterclass &rarr;</a>
+
+  <div class="cta-secondary">
+    <a href="https://founders.thrivingera.com" class="cta-link">Explore Conscious Founder OS</a>
+    <a href="https://calendly.com/rochelle-thrivingera/exploratory-call" class="cta-link">Work With Me</a>
+  </div>
+</div>
+
+<script>
+/* ------------------------------------------------------------------ CONFIG
+   ENDPOINT is the lead-capture route on the cofounder-os-remote Vercel app.
+   It holds the Supabase service key server-side, so no key is ever in this
+   page. This host (lead-magnets-peach.vercel.app) is already inside that
+   route's allowlist via its *.vercel.app rule — if this magnet moves to a
+   custom domain, add that domain to LEAD_ALLOWED_ORIGINS in Vercel or the
+   browser will block the POST.
+-------------------------------------------------------------------------- */
+var ENDPOINT = 'https://cofounder.thrivingera.com/api/subscribe';
+var MAGNET   = 'whatsapp';
+var STORAGE  = 'te-whatsapp-guide';
+
+(function () {
+  var form   = document.getElementById('gate-form');
+  var gate   = document.getElementById('gate');
+  var msg    = document.getElementById('gate-msg');
+  var button = document.getElementById('gate-submit');
+  if (!form) return;
+
+  function reveal(scroll) {
+    var sections = document.querySelectorAll('.gated');
+    for (var i = 0; i < sections.length; i++) sections[i].hidden = false;
+    gate.hidden = true;
+    if (scroll && sections.length) {
+      sections[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /* Someone who already unlocked should never be asked twice. localStorage can
+     throw outright in a private window, so every access is guarded. */
+  try {
+    if (window.localStorage && localStorage.getItem(STORAGE)) { reveal(false); return; }
+  } catch (e) { /* no storage — they just fill it in again */ }
+
+  /* The number field only appears once they ask for it, so the form stays two
+     fields long for everyone who does not want WhatsApp. */
+  var waBox  = document.getElementById('gate-wa');
+  var waWrap = document.getElementById('gate-wa-wrap');
+  var waNum  = document.getElementById('gate-wa-number');
+  waBox.addEventListener('change', function () {
+    waWrap.className = waBox.checked ? 'optin-number shown' : 'optin-number';
+    if (waBox.checked) waNum.focus();
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim();
+    var name  = document.getElementById('gate-name').value.trim();
+    var hp    = document.getElementById('gate-company').value.trim();
+    var wa    = waBox.checked;
+    var waVal = waNum.value.trim();
+
+    /* Asking for consent and then not being able to honour it is worse than not
+       asking. If they ticked the box, the number has to be usable. */
+    if (wa && !/^\+?[\d\s().-]{8,}$/.test(waVal)) {
+      msg.textContent = 'Add your WhatsApp number with its country code, or untick the box.';
+      waNum.focus();
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      msg.textContent = 'That email does not look right. Check it and try again.';
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = 'Unlocking...';
+    msg.textContent = '';
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        name: name,
+        company: hp,
+        magnet: MAGNET,
+        whatsapp_optin: wa,
+        whatsapp_number: wa ? waVal : '',
+        /* Store what they actually agreed to, not just that they agreed. */
+        whatsapp_consent_text: wa ? document.getElementById('gate-wa-text').textContent.trim() : ''
+      })
+    })
+      .then(function (r) { return r.json().catch(function () { return { ok: r.ok }; }); })
+      .then(function (data) {
+        if (!data.ok) throw new Error(data.error || 'save failed');
+        try { if (window.localStorage) localStorage.setItem(STORAGE, '1'); } catch (e) {}
+        reveal(true);
+      })
+      .catch(function () {
+        /* Never hold the guide hostage to our own outage. They gave us the address;
+           losing it costs us a subscriber, losing their trust costs more. */
+        msg.textContent = 'Could not save that — but here is the guide anyway.';
+        reveal(true);
+      });
+  });
+})();
+</script>
+
+<div class="footer">&copy; 2026 Thriving Era Studio &middot; Rochelle Livingstone</div>
+
+</body>
+</html>
