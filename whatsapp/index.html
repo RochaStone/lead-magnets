@@ -1074,6 +1074,8 @@
     <a href="https://founders.thrivingera.com" class="cta-link">Explore Conscious Founder OS</a>
     <!-- TODO: confirm this URL. The masterclass lives on founders.thrivingera.com,
          so this may want to be founders.thrivingera.com/work-with-me. -->
+    <!-- TODO: confirm. The masterclass is on founders.thrivingera.com, so this
+         may want to be founders.thrivingera.com/work-with-me. -->
     <a href="https://thrivingera.com/work-with-me" class="cta-link">Work With Me</a>
   </div>
 </div>
@@ -1081,16 +1083,14 @@
 
 <script>
 /* ------------------------------------------------------------------ CONFIG
-   Three URLs to confirm. The OS link is live; the other two are assumptions —
-   change them here and in the CTA block above if they differ.
-     masterclass : https://founders.thrivingera.com/masterclass
-     work with me: https://thrivingera.com/work-with-me
-   ENDPOINT is the lead-capture route on the CFOS Vercel app. It holds the
-   Supabase service key server-side, so no key is ever in this page.
-   Its origin allowlist must include wherever this page is hosted
-   (LEAD_ALLOWED_ORIGINS in Vercel).
+   ENDPOINT is the lead-capture route on the cofounder-os-remote Vercel app.
+   It holds the Supabase service key server-side, so no key is ever in this
+   page. This host (lead-magnets-peach.vercel.app) is already inside that
+   route's allowlist via its *.vercel.app rule — if this magnet moves to a
+   custom domain, add that domain to LEAD_ALLOWED_ORIGINS in Vercel or the
+   browser will block the POST.
 -------------------------------------------------------------------------- */
-var ENDPOINT = 'https://REPLACE-WITH-YOUR-CFOS-DOMAIN/api/subscribe';
+var ENDPOINT = 'https://cofounder.thrivingera.com/api/subscribe';
 var MAGNET   = 'whatsapp';
 var STORAGE  = 'te-whatsapp-guide';
 
