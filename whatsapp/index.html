@@ -493,7 +493,8 @@
   }
 
   .gate-form input[type="text"],
-  .gate-form input[type="email"] {
+  .gate-form input[type="email"],
+  .gate-form input[type="tel"] {
     font-family: 'Courier Prime', monospace;
     font-size: 15px;
     padding: 14px 16px;
@@ -525,6 +526,45 @@
   .gate-form button:hover:not(:disabled) { background: transparent; color: #FDF8F4; }
   .gate-form button:focus-visible { outline: 3px solid #E91E73; outline-offset: 3px; }
   .gate-form button:disabled { opacity: 0.6; cursor: wait; }
+
+  /* OPT-IN */
+  .optin {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    margin-top: 4px;
+    cursor: pointer;
+  }
+
+  .optin input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    flex: 0 0 18px;
+    accent-color: #C2185B;
+    cursor: pointer;
+  }
+
+  .optin input[type="checkbox"]:focus-visible { outline: 3px solid #E91E73; outline-offset: 2px; }
+
+  .optin span {
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(253,248,244,0.75);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .optin-number { display: none; flex-direction: column; gap: 8px; }
+  .optin-number.shown { display: flex; }
+
+  .optin-hint {
+    font-size: 11px;
+    line-height: 1.5;
+    color: rgba(253,248,244,0.45);
+    text-transform: none;
+    letter-spacing: 0;
+  }
 
   /* Bots fill every field. Humans never see this one. */
   .gate-hp {
@@ -809,6 +849,18 @@
       <label for="gate-email">Email</label>
       <input type="email" id="gate-email" name="email" autocomplete="email" required
              placeholder="you@yourstudio.com">
+
+      <label class="optin" for="gate-wa">
+        <input type="checkbox" id="gate-wa" name="whatsapp_optin">
+        <span id="gate-wa-text">Also send me the occasional build-along on WhatsApp. Never daily, never a broadcast list I can't leave.</span>
+      </label>
+
+      <div class="optin-number" id="gate-wa-wrap">
+        <label for="gate-wa-number">WhatsApp number</label>
+        <input type="tel" id="gate-wa-number" name="whatsapp_number" autocomplete="tel"
+               placeholder="+61 491 570 156">
+        <span class="optin-hint">Include your country code. Without it I can't tell a London number from a Sydney one.</span>
+      </div>
 
       <div class="gate-hp" aria-hidden="true">
         <label for="gate-company">Company</label>
@@ -1111,11 +1163,31 @@ var STORAGE  = 'te-whatsapp-guide';
     if (window.localStorage && localStorage.getItem(STORAGE)) { reveal(false); return; }
   } catch (e) { /* no storage — they just fill it in again */ }
 
+  /* The number field only appears once they ask for it, so the form stays two
+     fields long for everyone who does not want WhatsApp. */
+  var waBox  = document.getElementById('gate-wa');
+  var waWrap = document.getElementById('gate-wa-wrap');
+  var waNum  = document.getElementById('gate-wa-number');
+  waBox.addEventListener('change', function () {
+    waWrap.className = waBox.checked ? 'optin-number shown' : 'optin-number';
+    if (waBox.checked) waNum.focus();
+  });
+
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     var email = document.getElementById('gate-email').value.trim();
     var name  = document.getElementById('gate-name').value.trim();
     var hp    = document.getElementById('gate-company').value.trim();
+    var wa    = waBox.checked;
+    var waVal = waNum.value.trim();
+
+    /* Asking for consent and then not being able to honour it is worse than not
+       asking. If they ticked the box, the number has to be usable. */
+    if (wa && !/^\+?[\d\s().-]{8,}$/.test(waVal)) {
+      msg.textContent = 'Add your WhatsApp number with its country code, or untick the box.';
+      waNum.focus();
+      return;
+    }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
       msg.textContent = 'That email does not look right. Check it and try again.';
@@ -1129,7 +1201,16 @@ var STORAGE  = 'te-whatsapp-guide';
     fetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, name: name, company: hp, magnet: MAGNET })
+      body: JSON.stringify({
+        email: email,
+        name: name,
+        company: hp,
+        magnet: MAGNET,
+        whatsapp_optin: wa,
+        whatsapp_number: wa ? waVal : '',
+        /* Store what they actually agreed to, not just that they agreed. */
+        whatsapp_consent_text: wa ? document.getElementById('gate-wa-text').textContent.trim() : ''
+      })
     })
       .then(function (r) { return r.json().catch(function () { return { ok: r.ok }; }); })
       .then(function (data) {
