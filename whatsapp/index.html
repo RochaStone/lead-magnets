@@ -1130,15 +1130,15 @@
 
 <script>
 /* ------------------------------------------------------------------ CONFIG
-   ENDPOINT is the lead-capture route on the cofounder-os-remote Vercel app.
-   It holds the Supabase service key server-side, so no key is ever in this
-   page. This host (lead-magnets-peach.vercel.app) is already inside that
-   route's allowlist via its *.vercel.app rule — if this magnet moves to a
-   custom domain, add that domain to LEAD_ALLOWED_ORIGINS in Vercel or the
-   browser will block the POST.
+   The standard lead pipeline, same as every form on founders.thrivingera.com.
+   It writes site_leads, adds the subscriber to a MailerLite group and the
+   master nurture list, sends the delivery email, and notifies Rocha. The
+   magnet slug must exist in the MAGNETS registry in cfos-webhooks or the
+   endpoint returns 400 "Unknown lead magnet".
 -------------------------------------------------------------------------- */
-var ENDPOINT = 'https://cofounder.thrivingera.com/api/subscribe';
-var MAGNET   = 'whatsapp';
+var ENDPOINT = 'https://cfos-webhooks.vercel.app/api/lead-magnet';
+var MAGNET   = 'whatsapp-automation';
+var KEYWORD  = 'PAGE';
 var STORAGE  = 'te-whatsapp-guide';
 
 (function () {
@@ -1159,6 +1159,15 @@ var STORAGE  = 'te-whatsapp-guide';
 
   /* Someone who already unlocked should never be asked twice. localStorage can
      throw outright in a private window, so every access is guarded. */
+  /* The delivery email links back here with ?unlocked=1. Someone who already
+     gave us their address should never be asked for it twice, least of all on
+     the second device they open the email on. */
+  if (/[?&]unlocked=1/.test(window.location.search)) {
+    try { if (window.localStorage) localStorage.setItem(STORAGE, '1'); } catch (e) {}
+    reveal(false);
+    return;
+  }
+
   try {
     if (window.localStorage && localStorage.getItem(STORAGE)) { reveal(false); return; }
   } catch (e) { /* no storage — they just fill it in again */ }
@@ -1204,8 +1213,11 @@ var STORAGE  = 'te-whatsapp-guide';
       body: JSON.stringify({
         email: email,
         name: name,
-        company: hp,
         magnet: MAGNET,
+        source_keyword: KEYWORD,
+        /* Not read by the endpoint, but it stores the whole body in
+           site_leads.raw, so the opt-in is captured without changing it. */
+        company: hp,
         whatsapp_optin: wa,
         whatsapp_number: wa ? waVal : '',
         /* Store what they actually agreed to, not just that they agreed. */
