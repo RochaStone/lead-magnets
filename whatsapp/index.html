@@ -445,6 +445,135 @@
 
   ul.rules li:last-child { margin-bottom: 0; }
 
+
+  /* GATE */
+  .gate {
+    background: #1A1A1A;
+    background-image: linear-gradient(135deg, rgba(194,24,91,0.18), rgba(183,110,121,0.10));
+    padding: 64px 24px;
+    color: #FDF8F4;
+    text-align: center;
+  }
+
+  .gate .inner { max-width: 560px; }
+
+  .gate .eyebrow {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #E91E73;
+    margin-bottom: 14px;
+  }
+
+  .gate h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(26px, 4.5vw, 36px);
+    text-transform: uppercase;
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+    text-wrap: balance;
+  }
+
+  .gate p.gate-sub {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(253,248,244,0.7);
+    margin-bottom: 28px;
+  }
+
+  .gate-form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+
+  .gate-form label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(253,248,244,0.55);
+  }
+
+  .gate-form input[type="text"],
+  .gate-form input[type="email"] {
+    font-family: 'Courier Prime', monospace;
+    font-size: 15px;
+    padding: 14px 16px;
+    background: #FDF8F4;
+    color: #1A1A1A;
+    border: 2px solid transparent;
+    width: 100%;
+  }
+
+  .gate-form input:focus-visible {
+    outline: none;
+    border-color: #E91E73;
+  }
+
+  .gate-form button {
+    font-family: 'Anton', sans-serif;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #1A1A1A;
+    background: #FDF8F4;
+    border: 2px solid #FDF8F4;
+    padding: 15px 24px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    margin-top: 6px;
+  }
+
+  .gate-form button:hover:not(:disabled) { background: transparent; color: #FDF8F4; }
+  .gate-form button:focus-visible { outline: 3px solid #E91E73; outline-offset: 3px; }
+  .gate-form button:disabled { opacity: 0.6; cursor: wait; }
+
+  /* Bots fill every field. Humans never see this one. */
+  .gate-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .gate-note {
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba(253,248,244,0.45);
+    margin-top: 18px;
+  }
+
+  .gate-msg {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 14px;
+    min-height: 20px;
+    color: #FFB3CE;
+  }
+
+  /* SECONDARY CTA ROW */
+  .cta-secondary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .cta-link {
+    font-family: 'Courier Prime', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FDF8F4;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(253,248,244,0.45);
+    padding-bottom: 3px;
+    transition: border-color 0.3s ease;
+  }
+
+  .cta-link:hover { border-color: #FDF8F4; }
+  .cta-link:focus-visible { outline: 3px solid #FDF8F4; outline-offset: 4px; }
+
   /* CTA */
   .cta-section {
     background: linear-gradient(135deg, #C2185B, #B76E79);
@@ -502,6 +631,7 @@
     .hero { padding: 56px 20px 50px; }
     .section-cream, .section-dark, .section-accent { padding: 48px 20px; }
     .cta-section { padding: 48px 20px; }
+    .gate { padding: 44px 20px; }
     .cap-grid { grid-template-columns: 1fr; }
     .numbers-inner { grid-template-columns: 1fr 1fr; }
     .number-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); }
@@ -662,7 +792,41 @@
   </div>
 </div>
 
-<div class="section-accent">
+
+<div class="gate" id="gate">
+  <div class="inner">
+    <div class="eyebrow">The Rest Of The Guide</div>
+    <h2>THE SETUP, THE PROMPTS, AND WHAT BREAKS</h2>
+    <p class="gate-sub">
+      You have the map. The build is below &mdash; step-by-step for all three paths, the five
+      prompts to run first, and the failures that cost people an afternoon. Tell me where to send it.
+    </p>
+
+    <form class="gate-form" id="gate-form" novalidate>
+      <label for="gate-name">First name</label>
+      <input type="text" id="gate-name" name="name" autocomplete="given-name" placeholder="Rocha">
+
+      <label for="gate-email">Email</label>
+      <input type="email" id="gate-email" name="email" autocomplete="email" required
+             placeholder="you@yourstudio.com">
+
+      <div class="gate-hp" aria-hidden="true">
+        <label for="gate-company">Company</label>
+        <input type="text" id="gate-company" name="company" tabindex="-1" autocomplete="off">
+      </div>
+
+      <button type="submit" id="gate-submit">Unlock The Build &rarr;</button>
+    </form>
+
+    <p class="gate-msg" id="gate-msg" role="status" aria-live="polite"></p>
+    <p class="gate-note">
+      One email, the guide, and the occasional build-along. Unsubscribe in a click, and I honour it
+      permanently &mdash; the list checks itself against every removal request before it sends.
+    </p>
+  </div>
+</div>
+
+<div class="section-accent gated" hidden>
   <div class="inner">
 
     <div class="path-block">
@@ -755,7 +919,7 @@
   </div>
 </div>
 
-<div class="section-dark">
+<div class="gated section-dark" hidden>
   <div class="inner">
     <div class="section-header">
       <div class="eyebrow">Read This Before You Believe A Demo</div>
@@ -789,7 +953,7 @@
   </div>
 </div>
 
-<div class="section-cream">
+<div class="gated section-cream" hidden>
   <div class="inner">
     <div class="section-header">
       <div class="eyebrow">Steal These</div>
@@ -834,7 +998,7 @@
   </div>
 </div>
 
-<div class="section-accent">
+<div class="gated section-accent" hidden>
   <div class="inner">
     <div class="section-header">
       <div class="eyebrow">A Day With It</div>
@@ -850,7 +1014,7 @@
   </div>
 </div>
 
-<div class="section-cream">
+<div class="gated section-cream" hidden>
   <div class="inner">
     <div class="section-header">
       <div class="eyebrow">If Something Breaks</div>
@@ -894,14 +1058,97 @@
 </div>
 
 <div class="cta-section">
-  <h2>THIS IS ONE SURFACE</h2>
+  <h2>YOU JUST AUTOMATED ONE SURFACE</h2>
   <p>
     Your inbox is one place the work hides. Your content, your offers, your pipeline and your
-    calendar are the others &mdash; and connecting them one at a time is not the same as running
+    calendar are the others &mdash; and wiring them up one at a time is not the same as running
     them as one system that already knows who you are.
   </p>
-  <a href="https://founders.thrivingera.com" class="cta-btn">See The OS Installation &rarr;</a>
+  <p>
+    The Founder Intervention is a free masterclass on building that system. Ninety minutes, no
+    pitch until the end, and you leave with the architecture whether or not you ever work with me.
+  </p>
+  <a href="https://thrivingera.com/masterclass" class="cta-btn">Join The Free Masterclass &rarr;</a>
+
+  <div class="cta-secondary">
+    <a href="https://founders.thrivingera.com" class="cta-link">Explore Conscious Founder OS</a>
+    <a href="https://thrivingera.com/work-with-me" class="cta-link">Work With Me</a>
+  </div>
 </div>
+
+
+<script>
+/* ------------------------------------------------------------------ CONFIG
+   Three URLs to confirm. The OS link is live; the other two are assumptions —
+   change them here and in the CTA block above if they differ.
+     masterclass : https://thrivingera.com/masterclass
+     work with me: https://thrivingera.com/work-with-me
+   ENDPOINT is the lead-capture route on the CFOS Vercel app. It holds the
+   Supabase service key server-side, so no key is ever in this page.
+   Its origin allowlist must include wherever this page is hosted
+   (LEAD_ALLOWED_ORIGINS in Vercel).
+-------------------------------------------------------------------------- */
+var ENDPOINT = 'https://REPLACE-WITH-YOUR-CFOS-DOMAIN/api/subscribe';
+var MAGNET   = 'whatsapp';
+var STORAGE  = 'te-whatsapp-guide';
+
+(function () {
+  var form   = document.getElementById('gate-form');
+  var gate   = document.getElementById('gate');
+  var msg    = document.getElementById('gate-msg');
+  var button = document.getElementById('gate-submit');
+  if (!form) return;
+
+  function reveal(scroll) {
+    var sections = document.querySelectorAll('.gated');
+    for (var i = 0; i < sections.length; i++) sections[i].hidden = false;
+    gate.hidden = true;
+    if (scroll && sections.length) {
+      sections[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /* Someone who already unlocked should never be asked twice. localStorage can
+     throw outright in a private window, so every access is guarded. */
+  try {
+    if (window.localStorage && localStorage.getItem(STORAGE)) { reveal(false); return; }
+  } catch (e) { /* no storage — they just fill it in again */ }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('gate-email').value.trim();
+    var name  = document.getElementById('gate-name').value.trim();
+    var hp    = document.getElementById('gate-company').value.trim();
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      msg.textContent = 'That email does not look right. Check it and try again.';
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = 'Unlocking...';
+    msg.textContent = '';
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, name: name, company: hp, magnet: MAGNET })
+    })
+      .then(function (r) { return r.json().catch(function () { return { ok: r.ok }; }); })
+      .then(function (data) {
+        if (!data.ok) throw new Error(data.error || 'save failed');
+        try { if (window.localStorage) localStorage.setItem(STORAGE, '1'); } catch (e) {}
+        reveal(true);
+      })
+      .catch(function () {
+        /* Never hold the guide hostage to our own outage. They gave us the address;
+           losing it costs us a subscriber, losing their trust costs more. */
+        msg.textContent = 'Could not save that — but here is the guide anyway.';
+        reveal(true);
+      });
+  });
+})();
+</script>
 
 <div class="footer">&copy; 2026 Thriving Era Studio &middot; Rochelle Livingstone</div>
 

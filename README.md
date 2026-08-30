@@ -6,7 +6,7 @@ Lead magnet landing pages for Thriving Era Studio.
 |------|--------|
 | `aistack/` | The Conscious Founder AI Stack — ten tools, what they cost, what each one is for |
 | `5prompts/` | 5 Claude Prompts That Don't Sound Like Everyone Else's |
-| `whatsapp/` | Automate Your WhatsApp With Claude — three setup paths, five prompts, and the honest limits of each |
+| `whatsapp/` | Automate Your WhatsApp With Claude — three setup paths, five prompts, and the honest limits of each. **Email-gated.** |
 
 Each is a single self-contained `index.html`. No build step, no dependencies beyond the Google
 Fonts link. Drop the folder anywhere static.
